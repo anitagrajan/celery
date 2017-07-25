@@ -465,6 +465,9 @@ class Celery(object):
 
             autoretry_for = tuple(options.get('autoretry_for', ()))
             retry_kwargs = options.get('retry_kwargs', {})
+            retry_backoff = int(options.get('retry_backoff', False))
+            retry_backoff_max = int(options.get('retry_backoff_max', 600))
+            retry_jitter = options.get('retry_jitter', True)
 
             if autoretry_for and not hasattr(task, '_orig_run'):
 
@@ -473,6 +476,13 @@ class Celery(object):
                     try:
                         return task._orig_run(*args, **kwargs)
                     except autoretry_for as exc:
+                        if retry_backoff:
+                            retry_kwargs['countdown'] = \
+                                get_exponential_backoff_interval(
+                                    factor=retry_backoff,
+                                    retries=task.request.retries,
+                                    maximum=retry_backoff_max,
+                                    full_jitter=retry_jitter)
                         raise task.retry(exc=exc, **retry_kwargs)
 
                 task._orig_run, task.run = task.run, run
