@@ -14,9 +14,9 @@ from collections import namedtuple
 
 SERIES = 'latentcall'
 
-__version__ = '4.1.0'
-__author__ = 'Ask Solem'
-__contact__ = 'ask@celeryproject.org'
+__version__ = '4.1.0.ud1'
+__author__ = 'Platform Team'
+__contact__ = 'platform@udemy.com'
 __homepage__ = 'http://celeryproject.org'
 __docformat__ = 'restructuredtext'
 __keywords__ = 'task job queue distributed messaging actor'
