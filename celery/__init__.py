@@ -14,7 +14,7 @@ from collections import namedtuple
 
 SERIES = 'latentcall'
 
-__version__ = '4.1.0.ud1'
+__version__ = '4.1.0.ud2'
 __author__ = 'Platform Team'
 __contact__ = 'platform@udemy.com'
 __homepage__ = 'http://celeryproject.org'
